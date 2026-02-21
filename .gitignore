@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.env
+__pycache__/
+venv/
+.venv/
+doc.md
+backend/app/data/submissions/
+backend/.pytest_cache/

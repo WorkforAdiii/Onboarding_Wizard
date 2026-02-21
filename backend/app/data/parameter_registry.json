@@ -1,0 +1,438 @@
+[
+    {
+        "name": "coal_consumption",
+        "display_name": "Coal Consumption",
+        "unit": "MT",
+        "unit_options": [
+            "MT",
+            "kg",
+            "ton"
+        ],
+        "category": "input",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "coal_gcv",
+        "display_name": "Coal GCV",
+        "unit": "kcal/kg",
+        "unit_options": [
+            "kcal/kg",
+            "MJ/kg",
+            "BTU/lb"
+        ],
+        "category": "input",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "lignite_consumption",
+        "display_name": "Lignite Consumption",
+        "unit": "MT",
+        "unit_options": [
+            "MT",
+            "kg",
+            "ton"
+        ],
+        "category": "input",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "biomass_consumption",
+        "display_name": "Biomass Consumption",
+        "unit": "MT",
+        "unit_options": [
+            "MT",
+            "kg",
+            "ton"
+        ],
+        "category": "input",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "feedwater_temperature",
+        "display_name": "Feedwater Temperature",
+        "unit": "°C",
+        "unit_options": [
+            "°C",
+            "K",
+            "°F"
+        ],
+        "category": "input",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "steam_generation",
+        "display_name": "Steam Generation",
+        "unit": "T/hr",
+        "unit_options": [
+            "T/hr",
+            "kg/hr",
+            "lb/hr"
+        ],
+        "category": "output",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "steam_pressure",
+        "display_name": "Steam Pressure",
+        "unit": "bar",
+        "unit_options": [
+            "bar",
+            "psi",
+            "kPa",
+            "MPa"
+        ],
+        "category": "output",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "steam_temperature",
+        "display_name": "Steam Temperature",
+        "unit": "°C",
+        "unit_options": [
+            "°C",
+            "K",
+            "°F"
+        ],
+        "category": "output",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "flue_gas_temperature",
+        "display_name": "Flue Gas Temperature",
+        "unit": "°C",
+        "unit_options": [
+            "°C",
+            "K",
+            "°F"
+        ],
+        "category": "output",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "steam_consumption",
+        "display_name": "Steam Consumption",
+        "unit": "T/hr",
+        "unit_options": [
+            "T/hr",
+            "kg/hr",
+            "lb/hr"
+        ],
+        "category": "input",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler",
+            "turbine"
+        ]
+    },
+    {
+        "name": "turbine_inlet_pressure",
+        "display_name": "Turbine Inlet Pressure",
+        "unit": "bar",
+        "unit_options": [
+            "bar",
+            "psi",
+            "kPa",
+            "MPa"
+        ],
+        "category": "input",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    },
+    {
+        "name": "turbine_inlet_temperature",
+        "display_name": "Turbine Inlet Temperature",
+        "unit": "°C",
+        "unit_options": [
+            "°C",
+            "K",
+            "°F"
+        ],
+        "category": "input",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    },
+    {
+        "name": "turbine_exhaust_pressure",
+        "display_name": "Turbine Exhaust Pressure",
+        "unit": "bar",
+        "unit_options": [
+            "bar",
+            "psi",
+            "kPa",
+            "MPa"
+        ],
+        "category": "output",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    },
+    {
+        "name": "turbine_exhaust_temperature",
+        "display_name": "Turbine Exhaust Temperature",
+        "unit": "°C",
+        "unit_options": [
+            "°C",
+            "K",
+            "°F"
+        ],
+        "category": "output",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    },
+    {
+        "name": "power_generation",
+        "display_name": "Power Generation",
+        "unit": "MWh",
+        "unit_options": [
+            "MWh",
+            "kWh",
+            "GWh"
+        ],
+        "category": "output",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    },
+    {
+        "name": "power_consumption",
+        "display_name": "Power Consumption",
+        "unit": "MWh",
+        "unit_options": [
+            "MWh",
+            "kWh",
+            "GWh"
+        ],
+        "category": "input",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    },
+    {
+        "name": "power_export",
+        "display_name": "Power Export",
+        "unit": "MWh",
+        "unit_options": [
+            "MWh",
+            "kWh",
+            "GWh"
+        ],
+        "category": "output",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    },
+    {
+        "name": "auxiliary_power",
+        "display_name": "Auxiliary Power",
+        "unit": "MWh",
+        "unit_options": [
+            "MWh",
+            "kWh",
+            "GWh"
+        ],
+        "category": "input",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    },
+    {
+        "name": "production_output",
+        "display_name": "Production Output",
+        "unit": "MT",
+        "unit_options": [
+            "MT",
+            "kg",
+            "ton"
+        ],
+        "category": "output",
+        "section": "PRODUCTION",
+        "applicable_asset_types": [
+            "product"
+        ]
+    },
+    {
+        "name": "water_consumption",
+        "display_name": "Water Consumption",
+        "unit": "KL",
+        "unit_options": [
+            "KL",
+            "m³",
+            "L"
+        ],
+        "category": "input",
+        "section": "UTILITIES",
+        "applicable_asset_types": [
+            "boiler",
+            "turbine"
+        ]
+    },
+    {
+        "name": "co2_emissions",
+        "display_name": "CO₂ Emissions",
+        "unit": "tCO2e",
+        "unit_options": [
+            "tCO2e",
+            "kg CO2",
+            "MT CO2"
+        ],
+        "category": "emission",
+        "section": "EMISSIONS",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "so2_emissions",
+        "display_name": "SO₂ Emissions",
+        "unit": "kg",
+        "unit_options": [
+            "kg",
+            "g",
+            "MT"
+        ],
+        "category": "emission",
+        "section": "EMISSIONS",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "nox_emissions",
+        "display_name": "NOx Emissions",
+        "unit": "kg",
+        "unit_options": [
+            "kg",
+            "g",
+            "MT"
+        ],
+        "category": "emission",
+        "section": "EMISSIONS",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "excess_oxygen",
+        "display_name": "Excess Oxygen in Flue Gas",
+        "unit": "%",
+        "unit_options": [
+            "%"
+        ],
+        "category": "output",
+        "section": "EMISSIONS",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "fly_ash_generated",
+        "display_name": "Fly Ash Generated",
+        "unit": "MT",
+        "unit_options": [
+            "MT",
+            "kg",
+            "ton"
+        ],
+        "category": "output",
+        "section": "WASTE",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "efficiency",
+        "display_name": "Boiler Efficiency",
+        "unit": "%",
+        "unit_options": [
+            "%",
+            "decimal"
+        ],
+        "category": "calculated",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "specific_coal_consumption",
+        "display_name": "Specific Coal Consumption",
+        "unit": "kg/kWh",
+        "unit_options": [
+            "kg/kWh",
+            "g/kWh",
+            "MT/MWh"
+        ],
+        "category": "calculated",
+        "section": "COGEN BOILER",
+        "applicable_asset_types": [
+            "boiler"
+        ]
+    },
+    {
+        "name": "heat_rate",
+        "display_name": "Heat Rate",
+        "unit": "kcal/kWh",
+        "unit_options": [
+            "kcal/kWh",
+            "kJ/kWh",
+            "BTU/kWh"
+        ],
+        "category": "calculated",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    },
+    {
+        "name": "plant_load_factor",
+        "display_name": "Plant Load Factor",
+        "unit": "%",
+        "unit_options": [
+            "%",
+            "decimal"
+        ],
+        "category": "calculated",
+        "section": "POWER PLANT",
+        "applicable_asset_types": [
+            "turbine"
+        ]
+    }
+]
