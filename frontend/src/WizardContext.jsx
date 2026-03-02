@@ -1,6 +1,5 @@
-import { createContext, useContext, useReducer, useEffect, useCallback } from 'react';
-
-const WizardContext = createContext(null);
+import { useReducer, useEffect, useCallback } from 'react';
+import { WizardContext } from './WizardContextDef';
 const STORAGE_KEY = 'latspace_wizard_state';
 
 const initialState = {
@@ -20,7 +19,8 @@ function loadFromStorage() {
             const parsed = JSON.parse(saved);
             return { ...initialState, ...parsed, submitted: false };
         }
-    } catch {
+    } catch (error) {
+        console.error('Failed to load wizard state from localStorage:', error);
     }
     return initialState;
 }
@@ -86,10 +86,4 @@ export function WizardProvider({ children }) {
     };
 
     return <WizardContext.Provider value={value}>{children}</WizardContext.Provider>;
-}
-
-export function useWizard() {
-    const ctx = useContext(WizardContext);
-    if (!ctx) throw new Error('useWizard must be used within WizardProvider');
-    return ctx;
 }

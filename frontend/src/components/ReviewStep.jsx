@@ -1,5 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
-import { useWizard } from '../WizardContext';
+import { useWizard } from '../useWizard';
 import { submitOnboarding, saveTemplate, loadTemplate, listTemplates, listSubmissions, deleteSubmission } from '../api';
 
 const CONFIRM_OVERWRITE = (name) => confirm(`Template with the name "${name}" already exists. Do you wish to overwrite it?`);

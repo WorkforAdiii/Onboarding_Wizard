@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useWizard } from './WizardContext';
+import { useWizard } from './useWizard';
 import PlantInfoStep from './components/PlantInfoStep';
 import AssetsStep from './components/AssetsStep';
 import ParametersStep from './components/ParametersStep';

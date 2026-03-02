@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from 'react';
-import { useWizard } from '../WizardContext';
+import { useWizard } from '../useWizard';
 import { fetchParameters } from '../api';
 
 const CATEGORY_OPTIONS = ['input', 'output', 'emission', 'calculated'];

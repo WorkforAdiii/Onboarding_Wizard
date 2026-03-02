@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import { useWizard } from '../WizardContext';
+import { useState } from 'react';
+import { useWizard } from '../useWizard';
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -16,12 +16,6 @@ export default function PlantInfoStep({ onNext }) {
     const { state, setPlant } = useWizard();
     const [errors, setErrors] = useState({});
     const [touched, setTouched] = useState({});
-
-    useEffect(() => {
-        if (Object.keys(touched).length > 0) {
-            setErrors(validate(state.plant));
-        }
-    }, [state.plant, touched]);
 
     function handleChange(field, value) {
         setPlant({ [field]: value });

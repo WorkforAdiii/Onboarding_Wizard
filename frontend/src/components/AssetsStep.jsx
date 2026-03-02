@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useWizard } from '../WizardContext';
+import { useWizard } from '../useWizard';
 
 const ASSET_TYPES = ['boiler', 'turbine', 'product', 'kiln', 'other'];
 

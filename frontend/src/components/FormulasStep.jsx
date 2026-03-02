@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo, useCallback } from 'react';
-import { useWizard } from '../WizardContext';
+import { useWizard } from '../useWizard';
 import { validateFormula } from '../api';
 
 const FORMULA_TEMPLATES = {
