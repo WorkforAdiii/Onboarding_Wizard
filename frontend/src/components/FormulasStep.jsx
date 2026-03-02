@@ -3,24 +3,47 @@ import { useWizard } from '../useWizard';
 import { validateFormula } from '../api';
 
 const FORMULA_TEMPLATES = {
+    // Calculated Parameters
     efficiency: [
-        { label: 'Boiler thermal efficiency', expr: '(steam_generation * 540) / (coal_consumption * coal_gcv) * 100' },
-        { label: 'Temperature differential', expr: '(steam_temperature - feedwater_temperature) / steam_temperature * 100' },
-        { label: 'Simple steam/coal ratio', expr: 'steam_generation / coal_consumption * 100' },
+        { label: 'Boiler thermal efficiency (Direct)', expr: '(steam_generation * (steam_temperature - feedwater_temperature)) / (coal_consumption * coal_gcv) * 100' },
+        { label: 'Boiler thermal efficiency (Simplified)', expr: '(steam_generation * 540) / (coal_consumption * coal_gcv) * 100' },
     ],
     specific_coal_consumption: [
-        { label: 'Coal per power', expr: 'coal_consumption * 1000 / power_generation' },
-        { label: 'Total fuel per power', expr: '(coal_consumption + lignite_consumption + biomass_consumption) * 1000 / power_generation' },
+        { label: 'Specific Coal Consumption (per MWh)', expr: 'coal_consumption * 1000 / power_generation' },
+        { label: 'Specific Coal Consumption (per ton steam)', expr: '(coal_consumption * 1000) / steam_generation' },
     ],
     heat_rate: [
-        { label: 'Standard heat rate', expr: 'coal_consumption * coal_gcv / power_generation' },
-        { label: 'Steam-based', expr: 'steam_consumption * 540 / power_generation' },
+        { label: 'Standard heat rate', expr: '(coal_consumption * coal_gcv) / power_generation' },
+        { label: 'Steam-based heat rate', expr: '(steam_consumption * 540) / power_generation' },
     ],
     plant_load_factor: [
         { label: 'Net generation ratio', expr: '(power_generation - auxiliary_power) / power_generation * 100' },
-        { label: 'Export-based', expr: 'power_export / power_generation * 100' },
-        { label: 'Expansion ratio', expr: 'turbine_inlet_pressure / turbine_exhaust_pressure' },
+        { label: 'Export-based ratio', expr: '(power_export / power_generation) * 100' },
     ],
+    // Emissions 
+    co2_emissions: [
+        { label: 'Estimated CO2 from Coal', expr: 'coal_consumption * 2.42' },
+        { label: 'Estimated CO2 from Total Fuel', expr: '(coal_consumption * 2.42) + (lignite_consumption * 2.1) + (biomass_consumption * 1.5)' }
+    ],
+    so2_emissions: [
+        { label: 'Estimated SO2', expr: 'coal_consumption * 0.05 * 1000' }
+    ],
+    nox_emissions: [
+        { label: 'Estimated NOx', expr: 'coal_consumption * 0.02 * 1000' }
+    ],
+    // General Outputs
+    power_export: [
+        { label: 'Net Export', expr: 'power_generation - auxiliary_power - power_consumption' }
+    ],
+    auxiliary_power: [
+        { label: 'Auxiliary Power (Fixed %)', expr: 'power_generation * 0.085' }
+    ],
+    production_output: [
+        { label: 'Steam-to-Product Ratio Base', expr: 'steam_consumption * 0.75' }
+    ],
+    fly_ash_generated: [
+        { label: 'Expected Fly Ash from Coal', expr: 'coal_consumption * 0.35' }
+    ]
 };
 
 function extractParamNames(expr) {
@@ -30,11 +53,10 @@ function extractParamNames(expr) {
 }
 
 function getAvailableTemplates(paramName, enabledNames) {
-    const allTemplates = FORMULA_TEMPLATES[paramName] || [];
-    return allTemplates.filter((t) => {
-        const refs = extractParamNames(t.expr);
-        return refs.every((r) => enabledNames.includes(r));
-    });
+    // Return all templates for the parameter so the user can see them and select them.
+    // If they select one with missing parameters, the validation step will gracefully tell them 
+    // which parameters they need to go back and enable.
+    return FORMULA_TEMPLATES[paramName] || [];
 }
 
 // ── Autocomplete input component ──
@@ -141,7 +163,13 @@ export default function FormulasStep({ onNext, onBack }) {
     const [showTemplates, setShowTemplates] = useState({});
 
     const calculatedParams = useMemo(() => {
-        return state.parameters.filter((p) => p.enabled && p.category === 'calculated');
+        return state.parameters.filter((p) => {
+            if (!p.enabled) return false;
+            if (p.category === 'calculated') return true;
+            // Also allow formulas for any parameter that has a template defined
+            // so they can choose to calculate things like emissions or outputs
+            return FORMULA_TEMPLATES[p.name] !== undefined;
+        });
     }, [state.parameters]);
 
     const enabledNames = useMemo(() => {
@@ -200,7 +228,14 @@ export default function FormulasStep({ onNext, onBack }) {
         if (calculatedParams.length === 0) return true;
         return calculatedParams.every((p) => {
             const expr = getExpression(p.name);
-            if (!expr.trim()) return true;
+
+            // If it's not a strictly "calculated" parameter, the formula is optional
+            if (p.category !== 'calculated' && !expr.trim()) return true;
+
+            // If it is strictly "calculated", it must have an expression
+            if (p.category === 'calculated' && !expr.trim()) return false;
+
+            // If there IS an expression, it must be valid
             const res = validationResults[p.name];
             return res && res.valid;
         });
@@ -215,7 +250,7 @@ export default function FormulasStep({ onNext, onBack }) {
             <div className="step-container">
                 <h2>Formulas</h2>
                 <p className="step-description">
-                    No calculated parameters are enabled. You can go back and enable parameters with category "calculated",
+                    No parameters require formulas. You can go back and enable calculated parameters,
                     or continue to the next step.
                 </p>
                 <div className="step-actions">
@@ -230,8 +265,9 @@ export default function FormulasStep({ onNext, onBack }) {
         <div className="step-container">
             <h2>Formulas</h2>
             <p className="step-description">
-                Define expressions for calculated parameters. Use enabled parameter names as variables (e.g.{' '}
-                <code>steam_generation / coal_consumption * 100</code>).
+                Define expressions for your parameters.
+                Parameters with a <strong>Calculated</strong> category <em>must</em> have a valid formula.
+                For other parameters, formulas are optional but helpful for auto-filling data later.
             </p>
 
             {calculatedParams.map((param) => {
@@ -286,7 +322,7 @@ export default function FormulasStep({ onNext, onBack }) {
                                     onValidate={() => handleValidate(param.name, expr)}
                                     suggestions={enabledNames.filter((n) => n !== param.name)}
                                     className={result && !result.valid ? 'input-error' : result?.valid ? 'input-valid' : ''}
-                                    placeholder="e.g. steam_generation / coal_consumption * 100"
+                                    placeholder={param.category === 'calculated' ? "Required: e.g. steam_generation * 100" : "Optional formula..."}
                                 />
                                 <button
                                     className="btn-validate"
@@ -295,6 +331,16 @@ export default function FormulasStep({ onNext, onBack }) {
                                 >
                                     {isValidating ? '...' : 'Validate'}
                                 </button>
+                                {param.category !== 'calculated' && expr.trim() && (
+                                    <button
+                                        className="btn-outline"
+                                        style={{ marginLeft: '8px', padding: '0 8px' }}
+                                        onClick={() => updateExpression(param.name, '')}
+                                        title="Clear optional formula"
+                                    >
+                                        ✕
+                                    </button>
+                                )}
                             </div>
                         </div>
 
@@ -320,6 +366,11 @@ export default function FormulasStep({ onNext, onBack }) {
                                         )}
                                     </>
                                 )}
+                            </div>
+                        )}
+                        {!result && param.category !== 'calculated' && !expr.trim() && (
+                            <div className="formula-result optional">
+                                <span style={{ color: 'var(--text-secondary)', fontSize: 13 }}>Formula is optional for {param.category} parameters.</span>
                             </div>
                         )}
                     </div>

@@ -62,11 +62,11 @@
     {
         "name": "feedwater_temperature",
         "display_name": "Feedwater Temperature",
-        "unit": "°C",
+        "unit": "\u00b0C",
         "unit_options": [
-            "°C",
+            "\u00b0C",
             "K",
-            "°F"
+            "\u00b0F"
         ],
         "category": "input",
         "section": "COGEN BOILER",
@@ -108,11 +108,11 @@
     {
         "name": "steam_temperature",
         "display_name": "Steam Temperature",
-        "unit": "°C",
+        "unit": "\u00b0C",
         "unit_options": [
-            "°C",
+            "\u00b0C",
             "K",
-            "°F"
+            "\u00b0F"
         ],
         "category": "output",
         "section": "COGEN BOILER",
@@ -123,11 +123,11 @@
     {
         "name": "flue_gas_temperature",
         "display_name": "Flue Gas Temperature",
-        "unit": "°C",
+        "unit": "\u00b0C",
         "unit_options": [
-            "°C",
+            "\u00b0C",
             "K",
-            "°F"
+            "\u00b0F"
         ],
         "category": "output",
         "section": "COGEN BOILER",
@@ -170,11 +170,11 @@
     {
         "name": "turbine_inlet_temperature",
         "display_name": "Turbine Inlet Temperature",
-        "unit": "°C",
+        "unit": "\u00b0C",
         "unit_options": [
-            "°C",
+            "\u00b0C",
             "K",
-            "°F"
+            "\u00b0F"
         ],
         "category": "input",
         "section": "POWER PLANT",
@@ -201,11 +201,11 @@
     {
         "name": "turbine_exhaust_temperature",
         "display_name": "Turbine Exhaust Temperature",
-        "unit": "°C",
+        "unit": "\u00b0C",
         "unit_options": [
-            "°C",
+            "\u00b0C",
             "K",
-            "°F"
+            "\u00b0F"
         ],
         "category": "output",
         "section": "POWER PLANT",
@@ -225,7 +225,8 @@
         "category": "output",
         "section": "POWER PLANT",
         "applicable_asset_types": [
-            "turbine"
+            "turbine",
+            "boiler"
         ]
     },
     {
@@ -240,7 +241,8 @@
         "category": "input",
         "section": "POWER PLANT",
         "applicable_asset_types": [
-            "turbine"
+            "turbine",
+            "boiler"
         ]
     },
     {
@@ -255,7 +257,8 @@
         "category": "output",
         "section": "POWER PLANT",
         "applicable_asset_types": [
-            "turbine"
+            "turbine",
+            "boiler"
         ]
     },
     {
@@ -270,7 +273,8 @@
         "category": "input",
         "section": "POWER PLANT",
         "applicable_asset_types": [
-            "turbine"
+            "turbine",
+            "boiler"
         ]
     },
     {
@@ -294,7 +298,7 @@
         "unit": "KL",
         "unit_options": [
             "KL",
-            "m³",
+            "m\u00b3",
             "L"
         ],
         "category": "input",
@@ -306,7 +310,7 @@
     },
     {
         "name": "co2_emissions",
-        "display_name": "CO₂ Emissions",
+        "display_name": "CO\u2082 Emissions",
         "unit": "tCO2e",
         "unit_options": [
             "tCO2e",
@@ -321,7 +325,7 @@
     },
     {
         "name": "so2_emissions",
-        "display_name": "SO₂ Emissions",
+        "display_name": "SO\u2082 Emissions",
         "unit": "kg",
         "unit_options": [
             "kg",
@@ -398,7 +402,8 @@
         "unit_options": [
             "kg/kWh",
             "g/kWh",
-            "MT/MWh"
+            "MT/MWh",
+            "kg/MT"
         ],
         "category": "calculated",
         "section": "COGEN BOILER",

@@ -42,7 +42,13 @@ function reducer(state, action) {
         case 'SET_SUBMITTED':
             return { ...state, submitted: true };
         case 'LOAD_STATE':
-            return { ...initialState, ...action.payload, submitted: false };
+            return {
+                ...initialState,
+                ...action.payload,
+                templateName: action.payload.templateName || action.payload.template_name || '',
+                currentStep: state.currentStep,
+                submitted: false
+            };
         case 'RESET':
             localStorage.removeItem(STORAGE_KEY);
             return initialState;

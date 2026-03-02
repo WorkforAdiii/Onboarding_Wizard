@@ -10,7 +10,6 @@ export default function ReviewStep({ onBack, onJumpTo }) {
     const [submitResult, setSubmitResult] = useState(null);
     const [submitError, setSubmitError] = useState('');
     const [templateMsg, setTemplateMsg] = useState('');
-    const [loadTemplateName, setLoadTemplateName] = useState('');
     const [templateList, setTemplateList] = useState([]);
     const [showTemplates, setShowTemplates] = useState(false);
     const [submissions, setSubmissions] = useState([]);
@@ -21,7 +20,7 @@ export default function ReviewStep({ onBack, onJumpTo }) {
         plant: state.plant,
         template_name: state.templateName.trim(),
         assets: state.assets.map((a) => ({ name: a.name, display_name: a.display_name, type: a.type })),
-        parameters: state.parameters.filter((p) => p.enabled).map(({ applicable_assets, ...rest }) => rest),
+        parameters: state.parameters.filter((p) => p.enabled).map(({ ...rest }) => rest),
         formulas: state.formulas.filter((f) => f.expression.trim()),
     }), [state]);
 
@@ -39,7 +38,7 @@ export default function ReviewStep({ onBack, onJumpTo }) {
             const result = await submitOnboarding(payload);
             setSubmitResult(result);
             setSubmitted();
-            try { setSubmissions(await listSubmissions()); } catch { }
+            try { setSubmissions(await listSubmissions()); } catch (err) { console.error('Failed to load submissions:', err); }
         } catch (err) {
             setSubmitError(err.message);
         } finally {
